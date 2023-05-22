@@ -1,5 +1,13 @@
+import Routes from "./routes";
+
 function App() {
-  return <h1>here</h1>;
+  console.log(Routes);
+
+  return (
+    <>
+      <Routes />
+    </>
+  );
 }
 
 export default App;
