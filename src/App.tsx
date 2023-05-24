@@ -1,12 +1,11 @@
 import Routes from "./routes";
+import ThemeCustomization from "./themes";
 
 function App() {
-  console.log(Routes);
-
   return (
-    <>
+    <ThemeCustomization>
       <Routes />
-    </>
+    </ThemeCustomization>
   );
 }
 
