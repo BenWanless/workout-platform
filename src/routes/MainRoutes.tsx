@@ -1,15 +1,23 @@
 import { lazy } from "react";
-import MinimalLayout from "../layout/MinimalLayout";
+import { MainLayout } from "../layout/MainLayout/MainLayout";
+import Loadable from "../components/Loadable";
+import { Workouts } from "../pages/Workouts/Workouts";
 
-const DashboardDefault = lazy(() => import("../pages/Dashboard"));
+const DashboardDefault = Loadable(
+  lazy(() => import("../pages/Dashboard/Dashboard"))
+);
 
 const MainRoutes = {
   path: "/",
-  element: <MinimalLayout />,
+  element: <MainLayout />,
   children: [
     {
-      path: "/",
+      path: "/home",
       element: <DashboardDefault />,
+    },
+    {
+      path: "/workouts",
+      element: <Workouts />,
     },
   ],
 };
