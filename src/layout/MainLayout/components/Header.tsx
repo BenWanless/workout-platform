@@ -25,16 +25,35 @@ import {
   ProfileOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
+import useOperatingSystem from "../../../utils/OperatingSystrem";
 
 const drawerWidth = 240;
 
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const searchBarRef = React.useRef<HTMLInputElement>(null);
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const operatingSystem = useOperatingSystem();
+
+  React.useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Check if Cmd (Mac) or Ctrl (Windows) and K key are pressed simultaneously
+      if ((event.metaKey || event.ctrlKey) && event.key === "k") {
+        event.preventDefault();
+        searchBarRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleProfileMenuOpen = (event: any) => {
@@ -133,6 +152,7 @@ function Header() {
       <FormControl sx={{ width: { xs: "100%", md: "50%" } }}>
         <OutlinedInput
           size="small"
+          inputRef={searchBarRef}
           id="header-search"
           startAdornment={
             <InputAdornment position="start" sx={{ mr: 1 }}>
@@ -143,7 +163,7 @@ function Header() {
           inputProps={{
             "aria-label": "weight",
           }}
-          placeholder="Ctrl + K"
+          placeholder={operatingSystem === "Windows" ? "Ctrl + K" : "⌘K"}
         />
       </FormControl>
     </Box>

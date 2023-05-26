@@ -10,7 +10,7 @@ interface TabPanelProps {
 type workoutProps = {
   title: string;
   description: string;
-
+};
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -46,11 +46,9 @@ export default function DashboardTabs() {
     setValue(newValue);
   };
 
-
-
-  const workoutMarkup({title}:) => (
+  const workoutMarkup = (
     <Box>
-      <Typography variant="h4">{title}</Typography>
+      <Typography variant="h4">toot</Typography>
     </Box>
   );
 
